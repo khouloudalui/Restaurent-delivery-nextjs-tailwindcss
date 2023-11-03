@@ -7,7 +7,7 @@ import Image from 'next/image'
 const Navbar = () => {
     const user = false
     return (
-        <div className='flex justify-between items-center h-12 text-red-500 p-4 border-b-2 border-b-red-500 uppercase md:h-14'>
+        <div className='flex justify-between items-center h-12 text-red-500 p-4 border-b-2 border-b-red-500 uppercase md:h-14 lg:px-10'>
             <div className='hidden md:flex gap-4 flex-1'>
                 <Link href="/">Home</Link>
                 <Link href="/">Menu</Link>
@@ -24,7 +24,7 @@ const Navbar = () => {
             </div>
 
             <div className='hidden md:flex items-center justify-end gap-4 flex-1'>
-                <div className='md:absolute top-3 r-2 lg:static flex items-center gap-2 cursor-pointer bg-orange-300 rounded-lg px-2'>
+                <div className='md:absolute top-3 right-4 lg:static flex items-center gap-2 cursor-pointer bg-orange-300 rounded-lg px-2'>
                     <Image src="/phone.png" alt="phone.png" width={20} height={20} />
                     <span>6455664</span>
                 </div>
