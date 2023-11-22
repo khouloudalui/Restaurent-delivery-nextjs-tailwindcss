@@ -11,7 +11,9 @@
   "dependencies": {
     "next": "14.0.1",
     "react": "^18",
+    "react-countdown": "^2.3.5",
     "react-dom": "^18",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "yarn": "^1.22.19"
   },
   "devDependencies": {
