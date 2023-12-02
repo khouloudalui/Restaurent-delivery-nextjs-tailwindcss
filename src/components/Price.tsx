@@ -14,7 +14,7 @@ const Price = ({ price, id, options }: Props) => {
     const handleClick = (addoption: number) => {
         setProductPrice(price + addoption)
     }
-    
+
     const handleIncQuantity = () => {
         if (quantity < 10) {
             setQuantity(prev => prev + 1)
@@ -34,7 +34,6 @@ const Price = ({ price, id, options }: Props) => {
                     <button key={option.title} className='p-2 ring-1 ring-red-400 rounded-md focus:bg-red-500 focus:text-white' onClick={() => handleClick(option.additionalPrice)} >{option.title}</button>
                 ))}
             </div>
-
             <div className='flex flex-row justify-between items-center'>
                 <div className='flex justify-between  w-full p-3 ring-1 ring-red-500'>
                     <span className=''>Quantity</span>
