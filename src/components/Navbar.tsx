@@ -48,7 +48,7 @@ const Navbar = () => {
                                         <Image src="/facebook.png" alt="facebook.png" width={20} height={20} className='object-contain' />
                                         <span>Sign in with Facebook</span>
                                     </button>
-                                    <p>Have a problem?<Link href="/">Contact us</Link></p>
+                                    <p className='text-sm'>Have a problem ? <Link href="/" className='text-blue-500'>Contact us</Link></p>
                                 </div>
                             </div>
                         </MoadalLogin></>)}
