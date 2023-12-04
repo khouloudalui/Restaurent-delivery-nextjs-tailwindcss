@@ -14,7 +14,7 @@ const links = [
 
 const Menu = () => {
     const [open, setOpen] = useState(false)
-    const user = true;
+    const user = false;
 
     const closeMenu = () => {
         setOpen(false);
