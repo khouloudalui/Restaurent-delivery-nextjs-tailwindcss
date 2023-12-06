@@ -2,7 +2,7 @@ import React from "react";
 
 const OrdersPage = () => {
     return (
-        <div className="p-4 lg:px-20 xl:px-40">
+        <div className="p-4 lg:px-20 xl:px-40 h-screen">
             <table className="w-full border-separate border-spacing-3">
                 <thead>
                     <tr className="text-left  ">
