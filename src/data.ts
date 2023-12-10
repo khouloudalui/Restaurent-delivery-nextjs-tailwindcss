@@ -1,3 +1,5 @@
+import { MenuType } from "./types/types";
+
 type Product = {
   id: number;
   title: string;
@@ -354,7 +356,7 @@ export const singleProduct: Product = {
 
 
 
-export const menu: Menu = [
+export const menu: MenuType = [
   {
     id: 1,
     slug: "pastas",
