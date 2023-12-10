@@ -3,8 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
 import CartIcon from './CartIcon'
-import MoadalLogin from './MoadalLogin'
-import ModalContentLogin from './ModalContentLogin'
+
 
 const links = [
     { id: 1, title: "Home", url: "/" },
@@ -16,7 +15,6 @@ const links = [
 
 const Menu = () => {
     const [open, setOpen] = useState(false)
-    const [modalOpen, setModalOpen] = useState<boolean>(false)
     const user = false;
 
     const closeMenu = () => {
@@ -27,16 +25,15 @@ const Menu = () => {
             {item.title}
         </Link>
     ));
-    const userLink = !user ? (
-        <>
-            <h1 className='cursor-pointer text-white' onClick={() => setModalOpen(true)}>Login</h1>
-            <MoadalLogin modalOpen={modalOpen} setModalOpen={setModalOpen} >
-                <ModalContentLogin />
-            </MoadalLogin></>
-    ) : (
+    const userLink = user ? (
+
         <Link href="/orders" onClick={closeMenu}>
             Orders
         </Link>
+
+    ) : (
+        <Link href="/login" onClick={closeMenu}>
+            Login    </Link>
     );
 
     return (

@@ -6,6 +6,7 @@ import CartIcon from './CartIcon'
 import Image from 'next/image'
 import MoadalLogin from './MoadalLogin'
 import ModalContentLogin from './ModalContentLogin'
+import LoginPage from '@/app/login/page'
 
 const Navbar = () => {
     const user = false
@@ -34,11 +35,7 @@ const Navbar = () => {
                     <span>6455664</span>
                 </div>
                 {user ? (<Link href="/orders" className='text-red-500'>Orders</Link>) : (
-                    <>
-                        <h1 className='cursor-pointer text-red-500' onClick={() => setModalOpen(true)}>Login</h1>
-                        <MoadalLogin modalOpen={modalOpen} setModalOpen={setModalOpen} >
-                            <ModalContentLogin/>
-                        </MoadalLogin></>)}
+                    <Link href="/login" className='text-red-500'>Login</Link>)}
 
                 <CartIcon />
             </div>
