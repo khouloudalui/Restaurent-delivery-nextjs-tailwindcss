@@ -1,10 +1,7 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
-  
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -13,7 +10,7 @@ datasource db {
 model Category {
   id        String    @id @default(cuid())
   createdAt DateTime  @default(now())
-  tittle    String
+  title     String
   desc      String
   color     String
   img       String
@@ -30,8 +27,8 @@ model Product {
   price      Decimal
   isFeatured Boolean  @default(false)
   options    Json[]
-  category   Category @relation(fields: [catSlug], references: [slug])
   catSlug    String
+  category   Category @relation(fields: [catSlug], references: [slug])
 }
 
 model Order {
@@ -40,5 +37,5 @@ model Order {
   price     Decimal
   products  Json[]
   status    String
-  intent_id String? @unique
+  intent_id String?  @unique
 }

@@ -2,7 +2,7 @@
 CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "tittle" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
     "desc" TEXT NOT NULL,
     "color" TEXT NOT NULL,
     "img" TEXT NOT NULL,
