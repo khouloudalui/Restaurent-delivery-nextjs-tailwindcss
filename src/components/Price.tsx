@@ -15,7 +15,7 @@ const Price = ({ price, id, options }: Props) => {
         setProductPrice(price + addoption)
     }
 
-    const handleIncQuantity = () => {
+    const handleIncQuantity = () => {   
         if (quantity < 10) {
             setQuantity(prev => prev + 1)
         }

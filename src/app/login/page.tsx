@@ -1,10 +1,23 @@
+"use client"
 import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import React from 'react'
 
 const LoginPage = () => {
-    const { data, status } = useSession()
+    const { data, status } = useSession() //The useSession() React Hook in the NextAuth.js client is the easiest way to check if someone is signed in.
+
+    const router = useRouter()
+
+    if (status === 'loading') {
+        return <p>Loading ...</p>
+    }
+
+    if (status === 'authenticated') {
+        router.push("/")
+    }
+
 
     console.log("data: " + data)
     console.log("status: " + status)
