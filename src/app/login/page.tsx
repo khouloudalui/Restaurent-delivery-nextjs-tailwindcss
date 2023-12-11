@@ -1,15 +1,21 @@
+import { signIn, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
 const LoginPage = () => {
+    const { data, status } = useSession()
+
+    console.log("data: " + data)
+    console.log("status: " + status)
+
     return (
 
         <div className='md:p-6 p-2 flex items-center justify-center h-[calc(100vh-10rem)] overflow-y-hidden '>
             <div className='h-full text-sm md:text-lg rounded-md flex flex-col p-6 gap-6 ring-1 ring-slate-200 shadow-lg'>
                 <h1 className='font-bold text-red-600'>Welcome!</h1>
                 <p>log into your account or create new one</p>
-                <button className='flex text-sm md:text-lg items-center gap-4 p-4 ring-1 ring-slate-200 hover:ring-slate-400 rounded-md'>
+                <button className='flex text-sm md:text-lg items-center gap-4 p-4 ring-1 ring-slate-200 hover:ring-slate-400 rounded-md' onClick={() => signIn("google")}>
                     <Image src="/google.png" alt="google.png" width={20} height={20} className='object-contain' />
                     <span >Sign in with google</span>
                 </button>
