@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 
 const OrdersPage = () => {
@@ -7,7 +8,7 @@ const OrdersPage = () => {
             <table className="w-full border-separate border-spacing-3">
                 <thead>
                     <tr className="text-left  ">
-                        <th className="hidden md:block">Order ID</th> 
+                        <th className="hidden md:block">Order ID</th>
                         <th>Date</th>
                         <th>Price</th>
                         <th className="hidden md:block">Products</th>
