@@ -18,8 +18,6 @@ export const GET = async (req: NextResponse) => {
           userEmail: session.user.email!,
         },
       });
-      console.log("ORDERS: ", +orders);
-
       return new NextResponse(JSON.stringify(orders), {
         status: 200,
       });
