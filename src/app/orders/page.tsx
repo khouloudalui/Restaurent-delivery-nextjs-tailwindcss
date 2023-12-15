@@ -1,13 +1,16 @@
 "use client";
 import { OrderType } from "@/types/types";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { MdModeEdit } from "react-icons/md";
+
 const OrdersPage = () => {
   const { data: session, status } = useSession();
+  const queryClient = useQueryClient();
+
   const router = useRouter();
   if (status === "unauthenticated") {
     router.push("/");
@@ -19,15 +22,30 @@ const OrdersPage = () => {
       fetch("http://localhost:3000/api/orders").then((res) => res.json()),
   });
 
-  if (isLoading || status === "loading") return "loading ...";
+  const mutation = useMutation({
+    mutationFn: ({ id, status }: { id: string; status: string }) => {
+      return fetch(`http://localhost:3000/api/orders/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(status),
+      });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["orders"] });
+    },
+  });
 
   const handleUpdate = (e: React.FormEvent<HTMLFormElement>, id: string) => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const input = form.elements[0] as HTMLInputElement;
     const status = input.value;
+    mutation.mutate({ id, status });
   };
 
+  if (isLoading || status === "loading") return "loading ...";
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-screen">
       <table className="w-full border-separate border-spacing-3">
