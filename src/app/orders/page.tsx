@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { MdModeEdit } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession();
@@ -43,6 +44,7 @@ const OrdersPage = () => {
     const input = form.elements[0] as HTMLInputElement;
     const status = input.value;
     mutation.mutate({ id, status });
+    toast.success("The order has been updated");
   };
 
   if (isLoading || status === "loading") return "loading ...";
