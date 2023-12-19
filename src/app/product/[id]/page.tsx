@@ -1,9 +1,24 @@
 import Price from "@/components/Price";
-import { singleProduct } from "@/data";
+import { ProductType } from "@/types/types";
 import Image from "next/image";
 import React from "react";
 
-const SingleProduct = () => {
+const getData = async (id: string) => {
+  const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+    cache: "no-store",
+  });
+  if (!res.ok) {
+    throw new Error("Failed");
+  }
+  return res.json();
+};
+
+type Props = {
+  params: { id: string };
+};
+
+const SingleProduct = async ({ params }: Props) => {
+  const singleProduct: ProductType = await getData(params.id);
   return (
     <div className="p-4  lg:px-20 xl:px-40  h-screen flex flex-col justify-around text-red-500 md:flex-row  md:gap-8  md:items-center">
       {singleProduct.img && (
@@ -19,7 +34,11 @@ const SingleProduct = () => {
       <div className="h-1/2 flex flex-col md:h-[70%] md:justify-center md:gap-6 xl:gap-8">
         <h1 className="font-bold text-2xl uppercase">{singleProduct.title}</h1>
         <p>{singleProduct.desc}</p>
-        <Price price={singleProduct.price} id={singleProduct.id} options={singleProduct.options}/>
+        <Price
+          price={singleProduct.price}
+          id={singleProduct.id}
+          options={singleProduct.options}
+        />
       </div>
     </div>
   );

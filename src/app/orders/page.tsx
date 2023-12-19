@@ -42,7 +42,7 @@ const OrdersPage = () => {
     e.preventDefault();
     const form = e.target as HTMLFormElement;
     const input = form.elements[0] as HTMLInputElement;
-    const status = input.value;
+    const status  = input.value;
     mutation.mutate({ id, status });
     toast.success("The order has been updated");
   };

@@ -4,6 +4,7 @@ import prisma from "@/utils/connect";
 //FETCH all PRODUCTS
 export const GET = async (req: NextResponse) => {
   const { searchParams } = new URL(req.url);
+  console.log(searchParams)
   const cat = searchParams.get("cat");
   console.log("category is "+ cat);
   try {
@@ -11,7 +12,9 @@ export const GET = async (req: NextResponse) => {
       where: {
         ...(cat ? { catSlug: cat } : { isFeatured: true }),
       },
-    }); // return an array of objects in JSON format
+    }); 
+    //==> if theres a cat(there is a query params return the product that )
+    // return an array of objects in JSON format
     return new NextResponse(JSON.stringify(products), {
       status: 200,
     });
