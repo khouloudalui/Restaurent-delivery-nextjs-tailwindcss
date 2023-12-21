@@ -1,20 +1,27 @@
 "use client";
+import { ProductType } from "@/types/types";
+import { useCartStore } from "@/utils/store";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 
-type Props = {
-  id: string;
-  price: number;
-  options?: { title: string; additionalPrice: number }[];
-};
-
-const Price = ({ price, id, options }: Props) => {
-  const [productPrice, setProductPrice] = useState(price);
+const Price = ({ product }: { product: ProductType }) => {
+  const [productPrice, setProductPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
-  console.log(quantity);
-  const handleClick = (addoption: number) => {
-    setProductPrice(price + addoption);
-  };
+  const [selectedOption, setSelectedOption] = useState<
+    | {
+        title: string;
+        additionalPrice: number;
+      }
+    | undefined
+  >(undefined);
+  console.log(selectedOption);
+  const { addToCart } = useCartStore();
+  console.log("product.price", product.price);
 
+  const handleClick = (option: { additionalPrice: number; title: string }) => {
+    setProductPrice(Number(product.price) + option.additionalPrice);
+    setSelectedOption(option);
+  };
   const handleIncQuantity = () => {
     if (quantity < 10) {
       setQuantity((prev) => prev + 1);
@@ -25,17 +32,27 @@ const Price = ({ price, id, options }: Props) => {
       setQuantity((prev) => prev - 1);
     }
   };
+  const handleCart = () => {
+    addToCart({
+      id: product.id,
+      title: product.title,
+      img: product.img,
+      price: productPrice,
+      optionTitle: selectedOption ? selectedOption.title : undefined,
+      quantity: quantity,
+    });
+    toast.success("The product added to your cart");
+  };
+  console.log("productpriceee", productPrice);
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">
-        ${(productPrice * quantity).toFixed(2)}
-      </h2>
+      <h2 className="text-2xl font-bold">{productPrice * quantity}</h2>
       <div className="flex gap-4">
-        {options?.map((option) => (
+        {product.options?.map((option) => (
           <button
             key={option.title}
             className="p-2 ring-1 ring-red-400 rounded-md focus:bg-red-500 focus:text-white"
-            onClick={() => handleClick(option.additionalPrice)}
+            onClick={() => handleClick(option)}
           >
             {option.title}
           </button>
@@ -50,7 +67,10 @@ const Price = ({ price, id, options }: Props) => {
             <button onClick={() => handleIncQuantity()}>{">"}</button>
           </div>
         </div>
-        <button className="uppercase  bg-red-500 text-white p-3  w-56 rounded-sm font-bold ring-2 ring-red-500">
+        <button
+          className="uppercase  bg-red-500 text-white p-3  w-56 rounded-sm font-bold ring-2 ring-red-500"
+          onClick={() => handleCart()}
+        >
           Add to cart
         </button>
       </div>
