@@ -1,7 +1,7 @@
 "use client";
 import { ProductType } from "@/types/types";
 import { useCartStore } from "@/utils/store";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Price = ({ product }: { product: ProductType }) => {
@@ -16,8 +16,9 @@ const Price = ({ product }: { product: ProductType }) => {
   >(undefined);
   console.log(selectedOption);
   const { addToCart } = useCartStore();
-  console.log("product.price", product.price);
-
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+  });
   const handleClick = (option: { additionalPrice: number; title: string }) => {
     setProductPrice(Number(product.price) + option.additionalPrice);
     setSelectedOption(option);
@@ -46,7 +47,9 @@ const Price = ({ product }: { product: ProductType }) => {
   console.log("productpriceee", productPrice);
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-2xl font-bold">{(productPrice * quantity).toFixed(2)}</h2>
+      <h2 className="text-2xl font-bold">
+        {(productPrice * quantity).toFixed(2)}
+      </h2>
       <div className="flex gap-4">
         {product.options?.map((option) => (
           <button
