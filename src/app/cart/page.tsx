@@ -8,7 +8,7 @@ const CartPage = () => {
   useEffect(() => {
     useCartStore.persist.rehydrate();
   }, []);
-  console.log(products);
+  console.log(totalPrice);
   return (
     <div className=" h-[calc(100vh-9rem)] md:h-[calc(100vh-8rem)] flex flex-col text-red-500 overflow-hidden lg:flex-row">
       <div className="h-1/2 p-4 flex flex-col lg:h-full lg:w-2/3 lg:px-20">
@@ -27,7 +27,7 @@ const CartPage = () => {
                 </h1>
                 <span>{item.optionTitle}</span>
               </div>
-              <h2 className="font-bold">{item.price}</h2>
+              <h2 className="font-bold">{item.price}dt</h2>
               <span
                 className="cursor-pointer"
                 onClick={() => removeFromCart(item)}

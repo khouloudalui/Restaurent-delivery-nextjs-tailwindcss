@@ -38,7 +38,7 @@ const Price = ({ product }: { product: ProductType }) => {
       id: product.id,
       title: product.title,
       img: product.img,
-      price: productPrice,
+      price: productPrice*quantity,
       optionTitle: selectedOption ? selectedOption.title : undefined,
       quantity: quantity,
     });
@@ -48,7 +48,7 @@ const Price = ({ product }: { product: ProductType }) => {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold">
-        {(productPrice * quantity).toFixed(2)}
+        {productPrice*quantity}
       </h2>
       <div className="flex gap-4">
         {product.options?.map((option) => (

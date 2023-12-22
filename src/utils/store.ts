@@ -18,7 +18,6 @@ export const useCartStore = create(
         const productInState = products.find(
           (product) => product.id === item.id
         );
-
         if (productInState) {
           const updateProducts = products.map((product) =>
             product.id === productInState.id
@@ -46,7 +45,7 @@ export const useCartStore = create(
       removeFromCart: (item) =>
         set((state) => ({
           products: state.products.filter((product) => product.id !== item.id),
-          quantity: state.totalItems - item.quantity,
+          totalItems: state.totalItems - item.quantity,
           totalPrice: state.totalPrice - item.price,
         })),
     }),
