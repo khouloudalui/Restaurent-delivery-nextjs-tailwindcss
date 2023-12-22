@@ -8,8 +8,8 @@ const CartPage = () => {
   console.log(products);
   return (
     <div className=" h-[calc(100vh-9rem)] md:h-[calc(100vh-8rem)] flex flex-col text-red-500 overflow-hidden lg:flex-row">
-      <div className="h-1/2 p-4 flex flex-col justify-center lg:h-full lg:w-2/3 lg:px-20 xl:px-40  overflow-y-auto  ">
-        <div className="pt-[9rem] md:pt-[9rem] lg:pt-0">
+      <div className="h-1/2 p-4 flex flex-col lg:h-full lg:w-2/3 lg:px-20">
+        <div className="">
           {products.map((item) => (
             <div
               className="flex items-center justify-between mb-4 bg-red-100 rounded-lg shadow-md p-2 "
@@ -37,7 +37,7 @@ const CartPage = () => {
       <div className="h-1/2 p-6  bg-red-100 flex flex-col gap-4 justify-center lg:h-full lg:w-1/3 lg:px-11 xl:px-10 2xl:text-xl 2xl:gap-6">
         <div className="flex  justify-between">
           <span>subtotal ({totalItems})</span>
-          <span>18dt</span>
+          <span>{totalPrice}</span>
         </div>
 
         <div className="flex  justify-between">
