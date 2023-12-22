@@ -1,10 +1,13 @@
 "use client";
 import { useCartStore } from "@/utils/store";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 const CartPage = () => {
   const { products, totalItems, totalPrice, removeFromCart } = useCartStore();
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+  }, []);
   console.log(products);
   return (
     <div className=" h-[calc(100vh-9rem)] md:h-[calc(100vh-8rem)] flex flex-col text-red-500 overflow-hidden lg:flex-row">
@@ -19,7 +22,9 @@ const CartPage = () => {
                 <Image src={item.img} alt="" width={100} height={100} />
               )}
               <div>
-                <h1 className="uppercase font-bold text-xl">{item.title}</h1>
+                <h1 className="uppercase font-bold text-xl">
+                  {item.title} x {item.quantity}
+                </h1>
                 <span>{item.optionTitle}</span>
               </div>
               <h2 className="font-bold">{item.price}</h2>
@@ -37,17 +42,17 @@ const CartPage = () => {
       <div className="h-1/2 p-6  bg-red-100 flex flex-col gap-4 justify-center lg:h-full lg:w-1/3 lg:px-11 xl:px-10 2xl:text-xl 2xl:gap-6">
         <div className="flex  justify-between">
           <span>subtotal ({totalItems})</span>
-          <span>{totalPrice}</span>
+          <span>${totalPrice}</span>
         </div>
 
         <div className="flex  justify-between">
           <span>service coat</span>
-          <span>7dtdt</span>
+          <span>7dt</span>
         </div>
 
         <div className="flex  justify-between">
           <span>delivary</span>
-          <span>5dtdt</span>
+          <span>5dt</span>
         </div>
 
         <hr className="my-2" />
