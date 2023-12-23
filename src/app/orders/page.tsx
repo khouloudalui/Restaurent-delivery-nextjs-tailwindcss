@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 const OrdersPage = () => {
   const { data: session, status } = useSession();
   const queryClient = useQueryClient();
-
+console.log(session)
   const router = useRouter();
   if (status === "unauthenticated") {
     router.push("/");

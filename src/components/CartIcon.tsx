@@ -19,6 +19,5 @@ const CartIcon = () => {
     </Link>
   );
 };
-
 export default CartIcon;
 //FIXME:cart link dnst center
