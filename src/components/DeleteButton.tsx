@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { MdDeleteForever } from "react-icons/md";
+import { toast } from "react-toastify";
 
 const DeleteButton = ({ id }: { id: string }) => {
   const { data: session, status } = useSession();
@@ -15,12 +16,25 @@ const DeleteButton = ({ id }: { id: string }) => {
   if (status === "unauthenticated" || !session?.user.isAdmin) {
     return;
   }
-  const handleDelete=()=>{
-    
-  }
+  const handleDelete = async () => {
+    const res = await fetch(`http://localhost:3000/api/products/${id}`, {
+      method: "DELETE",
+    });
+    if (res.status === 200) {
+      router.push("/menu");
+      toast.success("the product has been deleted!");
+    } else {
+      const data = await res.json();
+      toast.error(data.message);
+    }
+  };
+
   return (
-    <button className="bg-red-400 p-2 rounded-full absolute top-4 right-4 text-white">
-      <MdDeleteForever size={24} onClick={handleDelete}/>
+    <button
+      className="bg-red-400 p-2 rounded-full absolute top-4 right-4 text-white"
+      onClick={handleDelete}
+    >
+      <MdDeleteForever size={24} />
     </button>
   );
 };
