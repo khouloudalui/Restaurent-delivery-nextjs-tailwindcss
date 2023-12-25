@@ -62,7 +62,7 @@ export const POST = async (req: NextResponse) => {
     return new NextResponse(
       JSON.stringify({ message: "You are not authenticated!" }),
       {
-        status: 403,
+        status: 401,
       }
     );
   }

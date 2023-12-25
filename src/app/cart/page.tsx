@@ -15,10 +15,10 @@ const CartPage = () => {
   }, []);
   const handleCheckout = async () => {
     if (!session) {
-      router.push("/");
+      router.push("/login");
     } else {
       try {
-        const res = await fetch("http://localhost:3000/api/orders/", {
+        const res = await fetch("http://localhost:3000/api/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -29,6 +29,7 @@ const CartPage = () => {
           }),
         });
         const data = await res.json();
+        console.log("data of cart in handlecheckout",data)
         router.push(`/payment/${data.id}`);
       } catch (err) {
         console.log(err);
